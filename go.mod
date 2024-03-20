@@ -1,4 +1,4 @@
-module clickhouse-parser
+module github.com/asechiho/clickhouse-parser
 
 go 1.21.0
 
