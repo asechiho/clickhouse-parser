@@ -9,6 +9,8 @@ import (
 	"github.com/antlr4-go/antlr/v4"
 )
 
+import "slices"
+
 // Suppress unused import errors
 var _ = fmt.Printf
 var _ = strconv.Itoa
@@ -10140,10 +10142,10 @@ type IDictionaryAttrDfntContext interface {
 	GetParser() antlr.Parser
 
 	// GetAttrs returns the attrs attribute.
-	GetAttrs() map[string]string
+	GetAttrs() []string
 
 	// SetAttrs sets the attrs attribute.
-	SetAttrs(map[string]string)
+	SetAttrs([]string)
 
 	// Getter signatures
 	Identifier() IIdentifierContext
@@ -10170,7 +10172,7 @@ type IDictionaryAttrDfntContext interface {
 type DictionaryAttrDfntContext struct {
 	antlr.BaseParserRuleContext
 	parser antlr.Parser
-	attrs  map[string]string
+	attrs  []string
 }
 
 func NewEmptyDictionaryAttrDfntContext() *DictionaryAttrDfntContext {
@@ -10200,9 +10202,9 @@ func NewDictionaryAttrDfntContext(parser antlr.Parser, parent antlr.ParserRuleCo
 
 func (s *DictionaryAttrDfntContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *DictionaryAttrDfntContext) GetAttrs() map[string]string { return s.attrs }
+func (s *DictionaryAttrDfntContext) GetAttrs() []string { return s.attrs }
 
-func (s *DictionaryAttrDfntContext) SetAttrs(v map[string]string) { s.attrs = v }
+func (s *DictionaryAttrDfntContext) SetAttrs(v []string) { s.attrs = v }
 
 func (s *DictionaryAttrDfntContext) Identifier() IIdentifierContext {
 	var t antlr.RuleContext
@@ -10423,8 +10425,8 @@ func (p *ClickHouseParser) DictionaryAttrDfnt() (localctx IDictionaryAttrDfntCon
 			case 1:
 				p.SetState(738)
 
-				if !(!localctx.(*DictionaryAttrDfntContext).attrs.count("default")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$attrs.count(\"default\")", ""))
+				if !(!slices.Contains(localctx.(*DictionaryAttrDfntContext).attrs, "default")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($attrs, \"default\")", ""))
 					goto errorExit
 				}
 				{
@@ -10439,13 +10441,13 @@ func (p *ClickHouseParser) DictionaryAttrDfnt() (localctx IDictionaryAttrDfntCon
 					p.SetState(740)
 					p.Literal()
 				}
-				localctx.(*DictionaryAttrDfntContext).attrs.insert("default")
+				localctx.(*DictionaryAttrDfntContext).SetAttrs(append(localctx.(*DictionaryAttrDfntContext).attrs, "default"))
 
 			case 2:
 				p.SetState(743)
 
-				if !(!localctx.(*DictionaryAttrDfntContext).attrs.count("expression")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$attrs.count(\"expression\")", ""))
+				if !(!slices.Contains(localctx.(*DictionaryAttrDfntContext).attrs, "expression")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($attrs, \"expression\")", ""))
 					goto errorExit
 				}
 				{
@@ -10460,13 +10462,13 @@ func (p *ClickHouseParser) DictionaryAttrDfnt() (localctx IDictionaryAttrDfntCon
 					p.SetState(745)
 					p.columnExpr(0)
 				}
-				localctx.(*DictionaryAttrDfntContext).attrs.insert("expression")
+				localctx.(*DictionaryAttrDfntContext).SetAttrs(append(localctx.(*DictionaryAttrDfntContext).attrs, "expression"))
 
 			case 3:
 				p.SetState(748)
 
-				if !(!localctx.(*DictionaryAttrDfntContext).attrs.count("hierarchical")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$attrs.count(\"hierarchical\")", ""))
+				if !(!slices.Contains(localctx.(*DictionaryAttrDfntContext).attrs, "hierarchical")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($attrs, \"hierarchical\")", ""))
 					goto errorExit
 				}
 				{
@@ -10477,13 +10479,13 @@ func (p *ClickHouseParser) DictionaryAttrDfnt() (localctx IDictionaryAttrDfntCon
 						goto errorExit
 					}
 				}
-				localctx.(*DictionaryAttrDfntContext).attrs.insert("hierarchical")
+				localctx.(*DictionaryAttrDfntContext).SetAttrs(append(localctx.(*DictionaryAttrDfntContext).attrs, "hierarchical"))
 
 			case 4:
 				p.SetState(751)
 
-				if !(!localctx.(*DictionaryAttrDfntContext).attrs.count("injective")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$attrs.count(\"injective\")", ""))
+				if !(!slices.Contains(localctx.(*DictionaryAttrDfntContext).attrs, "injective")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($attrs, \"injective\")", ""))
 					goto errorExit
 				}
 				{
@@ -10494,13 +10496,13 @@ func (p *ClickHouseParser) DictionaryAttrDfnt() (localctx IDictionaryAttrDfntCon
 						goto errorExit
 					}
 				}
-				localctx.(*DictionaryAttrDfntContext).attrs.insert("injective")
+				localctx.(*DictionaryAttrDfntContext).SetAttrs(append(localctx.(*DictionaryAttrDfntContext).attrs, "injective"))
 
 			case 5:
 				p.SetState(754)
 
-				if !(!localctx.(*DictionaryAttrDfntContext).attrs.count("is_object_id")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$attrs.count(\"is_object_id\")", ""))
+				if !(!slices.Contains(localctx.(*DictionaryAttrDfntContext).attrs, "is_object_id")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($attrs, \"is_object_id\")", ""))
 					goto errorExit
 				}
 				{
@@ -10511,7 +10513,7 @@ func (p *ClickHouseParser) DictionaryAttrDfnt() (localctx IDictionaryAttrDfntCon
 						goto errorExit
 					}
 				}
-				localctx.(*DictionaryAttrDfntContext).attrs.insert("is_object_id")
+				localctx.(*DictionaryAttrDfntContext).SetAttrs(append(localctx.(*DictionaryAttrDfntContext).attrs, "is_object_id"))
 
 			case antlr.ATNInvalidAltNumber:
 				goto errorExit
@@ -10550,10 +10552,10 @@ type IDictionaryEngineClauseContext interface {
 	GetParser() antlr.Parser
 
 	// GetClauses returns the clauses attribute.
-	GetClauses() map[string]string
+	GetClauses() []string
 
 	// SetClauses sets the clauses attribute.
-	SetClauses(map[string]string)
+	SetClauses([]string)
 
 	// Getter signatures
 	DictionaryPrimaryKeyClause() IDictionaryPrimaryKeyClauseContext
@@ -10575,7 +10577,7 @@ type IDictionaryEngineClauseContext interface {
 type DictionaryEngineClauseContext struct {
 	antlr.BaseParserRuleContext
 	parser  antlr.Parser
-	clauses map[string]string
+	clauses []string
 }
 
 func NewEmptyDictionaryEngineClauseContext() *DictionaryEngineClauseContext {
@@ -10605,9 +10607,9 @@ func NewDictionaryEngineClauseContext(parser antlr.Parser, parent antlr.ParserRu
 
 func (s *DictionaryEngineClauseContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *DictionaryEngineClauseContext) GetClauses() map[string]string { return s.clauses }
+func (s *DictionaryEngineClauseContext) GetClauses() []string { return s.clauses }
 
-func (s *DictionaryEngineClauseContext) SetClauses(v map[string]string) { s.clauses = v }
+func (s *DictionaryEngineClauseContext) SetClauses(v []string) { s.clauses = v }
 
 func (s *DictionaryEngineClauseContext) DictionaryPrimaryKeyClause() IDictionaryPrimaryKeyClauseContext {
 	var t antlr.RuleContext
@@ -10899,67 +10901,67 @@ func (p *ClickHouseParser) DictionaryEngineClause() (localctx IDictionaryEngineC
 			case 1:
 				p.SetState(765)
 
-				if !(!localctx.(*DictionaryEngineClauseContext).clauses.count("source")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$clauses.count(\"source\")", ""))
+				if !(!slices.Contains(localctx.(*DictionaryEngineClauseContext).clauses, "source")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($clauses, \"source\")", ""))
 					goto errorExit
 				}
 				{
 					p.SetState(766)
 					p.SourceClause()
 				}
-				localctx.(*DictionaryEngineClauseContext).clauses.insert("source")
+				localctx.(*DictionaryEngineClauseContext).SetClauses(append(localctx.(*DictionaryEngineClauseContext).clauses, "source"))
 
 			case 2:
 				p.SetState(769)
 
-				if !(!localctx.(*DictionaryEngineClauseContext).clauses.count("lifetime")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$clauses.count(\"lifetime\")", ""))
+				if !(!slices.Contains(localctx.(*DictionaryEngineClauseContext).clauses, "lifetime")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($clauses, \"lifetime\")", ""))
 					goto errorExit
 				}
 				{
 					p.SetState(770)
 					p.LifetimeClause()
 				}
-				localctx.(*DictionaryEngineClauseContext).clauses.insert("lifetime")
+				localctx.(*DictionaryEngineClauseContext).SetClauses(append(localctx.(*DictionaryEngineClauseContext).clauses, "lifetime"))
 
 			case 3:
 				p.SetState(773)
 
-				if !(!localctx.(*DictionaryEngineClauseContext).clauses.count("layout")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$clauses.count(\"layout\")", ""))
+				if !(!slices.Contains(localctx.(*DictionaryEngineClauseContext).clauses, "layout")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($clauses, \"layout\")", ""))
 					goto errorExit
 				}
 				{
 					p.SetState(774)
 					p.LayoutClause()
 				}
-				localctx.(*DictionaryEngineClauseContext).clauses.insert("layout")
+				localctx.(*DictionaryEngineClauseContext).SetClauses(append(localctx.(*DictionaryEngineClauseContext).clauses, "layout"))
 
 			case 4:
 				p.SetState(777)
 
-				if !(!localctx.(*DictionaryEngineClauseContext).clauses.count("range")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$clauses.count(\"range\")", ""))
+				if !(!slices.Contains(localctx.(*DictionaryEngineClauseContext).clauses, "range")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($clauses, \"range\")", ""))
 					goto errorExit
 				}
 				{
 					p.SetState(778)
 					p.RangeClause()
 				}
-				localctx.(*DictionaryEngineClauseContext).clauses.insert("range")
+				localctx.(*DictionaryEngineClauseContext).SetClauses(append(localctx.(*DictionaryEngineClauseContext).clauses, "range"))
 
 			case 5:
 				p.SetState(781)
 
-				if !(!localctx.(*DictionaryEngineClauseContext).clauses.count("settings")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$clauses.count(\"settings\")", ""))
+				if !(!slices.Contains(localctx.(*DictionaryEngineClauseContext).clauses, "settings")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($clauses, \"settings\")", ""))
 					goto errorExit
 				}
 				{
 					p.SetState(782)
 					p.DictionarySettingsClause()
 				}
-				localctx.(*DictionaryEngineClauseContext).clauses.insert("settings")
+				localctx.(*DictionaryEngineClauseContext).SetClauses(append(localctx.(*DictionaryEngineClauseContext).clauses, "settings"))
 
 			case antlr.ATNInvalidAltNumber:
 				goto errorExit
@@ -13411,10 +13413,10 @@ type IEngineClauseContext interface {
 	GetParser() antlr.Parser
 
 	// GetClauses returns the clauses attribute.
-	GetClauses() map[string]string
+	GetClauses() []string
 
 	// SetClauses sets the clauses attribute.
-	SetClauses(map[string]string)
+	SetClauses([]string)
 
 	// Getter signatures
 	EngineExpr() IEngineExprContext
@@ -13438,7 +13440,7 @@ type IEngineClauseContext interface {
 type EngineClauseContext struct {
 	antlr.BaseParserRuleContext
 	parser  antlr.Parser
-	clauses map[string]string
+	clauses []string
 }
 
 func NewEmptyEngineClauseContext() *EngineClauseContext {
@@ -13468,9 +13470,9 @@ func NewEngineClauseContext(parser antlr.Parser, parent antlr.ParserRuleContext,
 
 func (s *EngineClauseContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *EngineClauseContext) GetClauses() map[string]string { return s.clauses }
+func (s *EngineClauseContext) GetClauses() []string { return s.clauses }
 
-func (s *EngineClauseContext) SetClauses(v map[string]string) { s.clauses = v }
+func (s *EngineClauseContext) SetClauses(v []string) { s.clauses = v }
 
 func (s *EngineClauseContext) EngineExpr() IEngineExprContext {
 	var t antlr.RuleContext
@@ -13795,80 +13797,80 @@ func (p *ClickHouseParser) EngineClause() (localctx IEngineClauseContext) {
 			case 1:
 				p.SetState(898)
 
-				if !(!localctx.(*EngineClauseContext).clauses.count("orderByClause")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$clauses.count(\"orderByClause\")", ""))
+				if !(!slices.Contains(localctx.(*EngineClauseContext).clauses, "orderByClause")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($clauses, \"orderByClause\")", ""))
 					goto errorExit
 				}
 				{
 					p.SetState(899)
 					p.OrderByClause()
 				}
-				localctx.(*EngineClauseContext).clauses.insert("orderByClause")
+				localctx.(*EngineClauseContext).SetClauses(append(localctx.(*EngineClauseContext).clauses, "orderByClause"))
 
 			case 2:
 				p.SetState(902)
 
-				if !(!localctx.(*EngineClauseContext).clauses.count("partitionByClause")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$clauses.count(\"partitionByClause\")", ""))
+				if !(!slices.Contains(localctx.(*EngineClauseContext).clauses, "partitionByClause")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($clauses, \"partitionByClause\")", ""))
 					goto errorExit
 				}
 				{
 					p.SetState(903)
 					p.PartitionByClause()
 				}
-				localctx.(*EngineClauseContext).clauses.insert("partitionByClause")
+				localctx.(*EngineClauseContext).SetClauses(append(localctx.(*EngineClauseContext).clauses, "partitionByClause"))
 
 			case 3:
 				p.SetState(906)
 
-				if !(!localctx.(*EngineClauseContext).clauses.count("primaryKeyClause")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$clauses.count(\"primaryKeyClause\")", ""))
+				if !(!slices.Contains(localctx.(*EngineClauseContext).clauses, "primaryKeyClause")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($clauses, \"primaryKeyClause\")", ""))
 					goto errorExit
 				}
 				{
 					p.SetState(907)
 					p.PrimaryKeyClause()
 				}
-				localctx.(*EngineClauseContext).clauses.insert("primaryKeyClause")
+				localctx.(*EngineClauseContext).SetClauses(append(localctx.(*EngineClauseContext).clauses, "primaryKeyClause"))
 
 			case 4:
 				p.SetState(910)
 
-				if !(!localctx.(*EngineClauseContext).clauses.count("sampleByClause")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$clauses.count(\"sampleByClause\")", ""))
+				if !(!slices.Contains(localctx.(*EngineClauseContext).clauses, "sampleByClause")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($clauses, \"sampleByClause\")", ""))
 					goto errorExit
 				}
 				{
 					p.SetState(911)
 					p.SampleByClause()
 				}
-				localctx.(*EngineClauseContext).clauses.insert("sampleByClause")
+				localctx.(*EngineClauseContext).SetClauses(append(localctx.(*EngineClauseContext).clauses, "sampleByClause"))
 
 			case 5:
 				p.SetState(914)
 
-				if !(!localctx.(*EngineClauseContext).clauses.count("ttlClause")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$clauses.count(\"ttlClause\")", ""))
+				if !(!slices.Contains(localctx.(*EngineClauseContext).clauses, "ttlClause")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($clauses, \"ttlClause\")", ""))
 					goto errorExit
 				}
 				{
 					p.SetState(915)
 					p.TtlClause()
 				}
-				localctx.(*EngineClauseContext).clauses.insert("ttlClause")
+				localctx.(*EngineClauseContext).SetClauses(append(localctx.(*EngineClauseContext).clauses, "ttlClause"))
 
 			case 6:
 				p.SetState(918)
 
-				if !(!localctx.(*EngineClauseContext).clauses.count("settingsClause")) {
-					p.SetError(antlr.NewFailedPredicateException(p, "!$clauses.count(\"settingsClause\")", ""))
+				if !(!slices.Contains(localctx.(*EngineClauseContext).clauses, "settingsClause")) {
+					p.SetError(antlr.NewFailedPredicateException(p, "!slices.Contains($clauses, \"settingsClause\")", ""))
 					goto errorExit
 				}
 				{
 					p.SetState(919)
 					p.SettingsClause()
 				}
-				localctx.(*EngineClauseContext).clauses.insert("settingsClause")
+				localctx.(*EngineClauseContext).SetClauses(append(localctx.(*EngineClauseContext).clauses, "settingsClause"))
 
 			case antlr.ATNInvalidAltNumber:
 				goto errorExit
@@ -38590,19 +38592,19 @@ func (p *ClickHouseParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIn
 func (p *ClickHouseParser) DictionaryAttrDfnt_Sempred(localctx antlr.RuleContext, predIndex int) bool {
 	switch predIndex {
 	case 0:
-		return !localctx.(*DictionaryAttrDfntContext).attrs.count("default")
+		return !slices.Contains(localctx.(*DictionaryAttrDfntContext).attrs, "default")
 
 	case 1:
-		return !localctx.(*DictionaryAttrDfntContext).attrs.count("expression")
+		return !slices.Contains(localctx.(*DictionaryAttrDfntContext).attrs, "expression")
 
 	case 2:
-		return !localctx.(*DictionaryAttrDfntContext).attrs.count("hierarchical")
+		return !slices.Contains(localctx.(*DictionaryAttrDfntContext).attrs, "hierarchical")
 
 	case 3:
-		return !localctx.(*DictionaryAttrDfntContext).attrs.count("injective")
+		return !slices.Contains(localctx.(*DictionaryAttrDfntContext).attrs, "injective")
 
 	case 4:
-		return !localctx.(*DictionaryAttrDfntContext).attrs.count("is_object_id")
+		return !slices.Contains(localctx.(*DictionaryAttrDfntContext).attrs, "is_object_id")
 
 	default:
 		panic("No predicate with index: " + fmt.Sprint(predIndex))
@@ -38612,19 +38614,19 @@ func (p *ClickHouseParser) DictionaryAttrDfnt_Sempred(localctx antlr.RuleContext
 func (p *ClickHouseParser) DictionaryEngineClause_Sempred(localctx antlr.RuleContext, predIndex int) bool {
 	switch predIndex {
 	case 5:
-		return !localctx.(*DictionaryEngineClauseContext).clauses.count("source")
+		return !slices.Contains(localctx.(*DictionaryEngineClauseContext).clauses, "source")
 
 	case 6:
-		return !localctx.(*DictionaryEngineClauseContext).clauses.count("lifetime")
+		return !slices.Contains(localctx.(*DictionaryEngineClauseContext).clauses, "lifetime")
 
 	case 7:
-		return !localctx.(*DictionaryEngineClauseContext).clauses.count("layout")
+		return !slices.Contains(localctx.(*DictionaryEngineClauseContext).clauses, "layout")
 
 	case 8:
-		return !localctx.(*DictionaryEngineClauseContext).clauses.count("range")
+		return !slices.Contains(localctx.(*DictionaryEngineClauseContext).clauses, "range")
 
 	case 9:
-		return !localctx.(*DictionaryEngineClauseContext).clauses.count("settings")
+		return !slices.Contains(localctx.(*DictionaryEngineClauseContext).clauses, "settings")
 
 	default:
 		panic("No predicate with index: " + fmt.Sprint(predIndex))
@@ -38634,22 +38636,22 @@ func (p *ClickHouseParser) DictionaryEngineClause_Sempred(localctx antlr.RuleCon
 func (p *ClickHouseParser) EngineClause_Sempred(localctx antlr.RuleContext, predIndex int) bool {
 	switch predIndex {
 	case 10:
-		return !localctx.(*EngineClauseContext).clauses.count("orderByClause")
+		return !slices.Contains(localctx.(*EngineClauseContext).clauses, "orderByClause")
 
 	case 11:
-		return !localctx.(*EngineClauseContext).clauses.count("partitionByClause")
+		return !slices.Contains(localctx.(*EngineClauseContext).clauses, "partitionByClause")
 
 	case 12:
-		return !localctx.(*EngineClauseContext).clauses.count("primaryKeyClause")
+		return !slices.Contains(localctx.(*EngineClauseContext).clauses, "primaryKeyClause")
 
 	case 13:
-		return !localctx.(*EngineClauseContext).clauses.count("sampleByClause")
+		return !slices.Contains(localctx.(*EngineClauseContext).clauses, "sampleByClause")
 
 	case 14:
-		return !localctx.(*EngineClauseContext).clauses.count("ttlClause")
+		return !slices.Contains(localctx.(*EngineClauseContext).clauses, "ttlClause")
 
 	case 15:
-		return !localctx.(*EngineClauseContext).clauses.count("settingsClause")
+		return !slices.Contains(localctx.(*EngineClauseContext).clauses, "settingsClause")
 
 	default:
 		panic("No predicate with index: " + fmt.Sprint(predIndex))

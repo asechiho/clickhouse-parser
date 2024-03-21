@@ -4,6 +4,10 @@ options {
     tokenVocab = ClickHouseLexer;
 }
 
+@parser::header {
+    import "slices";
+}
+
 // Top-level statements
 
 queryStmt: query (INTO OUTFILE STRING_LITERAL)? (FORMAT identifierOrNull)? (SEMICOLON)? | insertStmt;
@@ -114,23 +118,23 @@ createStmt
 
 dictionarySchemaClause: LPAREN dictionaryAttrDfnt (COMMA dictionaryAttrDfnt)* RPAREN;
 dictionaryAttrDfnt
-locals [map[string]string attrs]:
+locals [[]string attrs]:
     identifier columnTypeExpr
-    ( {!$attrs.count("default")}?      DEFAULT literal       {$attrs.insert("default");}
-    | {!$attrs.count("expression")}?   EXPRESSION columnExpr {$attrs.insert("expression");}
-    | {!$attrs.count("hierarchical")}? HIERARCHICAL          {$attrs.insert("hierarchical");}
-    | {!$attrs.count("injective")}?    INJECTIVE             {$attrs.insert("injective");}
-    | {!$attrs.count("is_object_id")}? IS_OBJECT_ID          {$attrs.insert("is_object_id");}
+    ( {!slices.Contains($attrs, "default")}?       DEFAULT literal       {$attrs = append($attrs, "default");}
+    | {!slices.Contains($attrs, "expression")}?    EXPRESSION columnExpr {$attrs = append($attrs, "expression");}
+    | {!slices.Contains($attrs, "hierarchical")}?  HIERARCHICAL          {$attrs = append($attrs, "hierarchical");}
+    | {!slices.Contains($attrs, "injective")}?     INJECTIVE             {$attrs = append($attrs, "injective");}
+    | {!slices.Contains($attrs, "is_object_id")}?  IS_OBJECT_ID          {$attrs = append($attrs, "is_object_id");}
     )*
     ;
 dictionaryEngineClause
-locals [map[string]string clauses]:
+locals [[]string clauses]:
     dictionaryPrimaryKeyClause?
-    ( {!$clauses.count("source")}? sourceClause {$clauses.insert("source");}
-    | {!$clauses.count("lifetime")}? lifetimeClause {$clauses.insert("lifetime");}
-    | {!$clauses.count("layout")}? layoutClause {$clauses.insert("layout");}
-    | {!$clauses.count("range")}? rangeClause {$clauses.insert("range");}
-    | {!$clauses.count("settings")}? dictionarySettingsClause {$clauses.insert("settings");}
+    ( {!slices.Contains($clauses, "source")}? sourceClause {$clauses = append($clauses, "source");}
+    | {!slices.Contains($clauses, "lifetime")}? lifetimeClause {$clauses = append($clauses, "lifetime");}
+    | {!slices.Contains($clauses, "layout")}? layoutClause {$clauses = append($clauses, "layout");}
+    | {!slices.Contains($clauses, "range")}? rangeClause {$clauses = append($clauses, "range");}
+    | {!slices.Contains($clauses, "settings")}? dictionarySettingsClause {$clauses = append($clauses, "settings");}
     )*
     ;
 dictionaryPrimaryKeyClause: PRIMARY KEY columnExprList;
@@ -154,14 +158,14 @@ tableSchemaClause
     | AS tableFunctionExpr                                      # SchemaAsFunctionClause
     ;
 engineClause
-locals [map[string]string clauses]:
+locals [[]string clauses]:
     engineExpr
-    ( {!$clauses.count("orderByClause")}?     orderByClause     {$clauses.insert("orderByClause");}
-    | {!$clauses.count("partitionByClause")}? partitionByClause {$clauses.insert("partitionByClause");}
-    | {!$clauses.count("primaryKeyClause")}?  primaryKeyClause  {$clauses.insert("primaryKeyClause");}
-    | {!$clauses.count("sampleByClause")}?    sampleByClause    {$clauses.insert("sampleByClause");}
-    | {!$clauses.count("ttlClause")}?         ttlClause         {$clauses.insert("ttlClause");}
-    | {!$clauses.count("settingsClause")}?    settingsClause    {$clauses.insert("settingsClause");}
+    ( {!slices.Contains($clauses, "orderByClause")}?     orderByClause     {$clauses = append($clauses, "orderByClause");}
+    | {!slices.Contains($clauses, "partitionByClause")}? partitionByClause {$clauses = append($clauses, "partitionByClause");}
+    | {!slices.Contains($clauses, "primaryKeyClause")}?  primaryKeyClause  {$clauses = append($clauses, "primaryKeyClause");}
+    | {!slices.Contains($clauses, "sampleByClause")}?    sampleByClause    {$clauses = append($clauses, "sampleByClause");}
+    | {!slices.Contains($clauses, "ttlClause")}?         ttlClause         {$clauses = append($clauses, "ttlClause");}
+    | {!slices.Contains($clauses, "settingsClause")}?    settingsClause    {$clauses = append($clauses, "settingsClause");}
     )*
     ;
 partitionByClause: PARTITION BY columnExpr;
