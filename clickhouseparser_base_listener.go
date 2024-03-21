@@ -20,6 +20,24 @@ func (s *BaseClickHouseParserListener) EnterEveryRule(ctx antlr.ParserRuleContex
 // ExitEveryRule is called when any rule is exited.
 func (s *BaseClickHouseParserListener) ExitEveryRule(ctx antlr.ParserRuleContext) {}
 
+// EnterRoot is called when production root is entered.
+func (s *BaseClickHouseParserListener) EnterRoot(ctx *RootContext) {}
+
+// ExitRoot is called when production root is exited.
+func (s *BaseClickHouseParserListener) ExitRoot(ctx *RootContext) {}
+
+// EnterStmtblock is called when production stmtblock is entered.
+func (s *BaseClickHouseParserListener) EnterStmtblock(ctx *StmtblockContext) {}
+
+// ExitStmtblock is called when production stmtblock is exited.
+func (s *BaseClickHouseParserListener) ExitStmtblock(ctx *StmtblockContext) {}
+
+// EnterStmtmulti is called when production stmtmulti is entered.
+func (s *BaseClickHouseParserListener) EnterStmtmulti(ctx *StmtmultiContext) {}
+
+// ExitStmtmulti is called when production stmtmulti is exited.
+func (s *BaseClickHouseParserListener) ExitStmtmulti(ctx *StmtmultiContext) {}
+
 // EnterQueryStmt is called when production queryStmt is entered.
 func (s *BaseClickHouseParserListener) EnterQueryStmt(ctx *QueryStmtContext) {}
 

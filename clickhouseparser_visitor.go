@@ -7,6 +7,15 @@ import "github.com/antlr4-go/antlr/v4"
 type ClickHouseParserVisitor interface {
 	antlr.ParseTreeVisitor
 
+	// Visit a parse tree produced by ClickHouseParser#root.
+	VisitRoot(ctx *RootContext) interface{}
+
+	// Visit a parse tree produced by ClickHouseParser#stmtblock.
+	VisitStmtblock(ctx *StmtblockContext) interface{}
+
+	// Visit a parse tree produced by ClickHouseParser#stmtmulti.
+	VisitStmtmulti(ctx *StmtmultiContext) interface{}
+
 	// Visit a parse tree produced by ClickHouseParser#queryStmt.
 	VisitQueryStmt(ctx *QueryStmtContext) interface{}
 

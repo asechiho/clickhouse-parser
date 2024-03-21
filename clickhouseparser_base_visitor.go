@@ -7,6 +7,18 @@ type BaseClickHouseParserVisitor struct {
 	*antlr.BaseParseTreeVisitor
 }
 
+func (v *BaseClickHouseParserVisitor) VisitRoot(ctx *RootContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseClickHouseParserVisitor) VisitStmtblock(ctx *StmtblockContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseClickHouseParserVisitor) VisitStmtmulti(ctx *StmtmultiContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseClickHouseParserVisitor) VisitQueryStmt(ctx *QueryStmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }

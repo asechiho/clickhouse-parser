@@ -8,6 +8,18 @@ options {
     import "slices";
 }
 
+root
+   : stmtblock EOF
+   ;
+
+stmtblock
+   : stmtmulti
+   ;
+
+stmtmulti
+   : (queryStmt SEMI?)*
+   ;
+
 // Top-level statements
 
 queryStmt: query (INTO OUTFILE STRING_LITERAL)? (FORMAT identifierOrNull)? (SEMICOLON)? | insertStmt;
